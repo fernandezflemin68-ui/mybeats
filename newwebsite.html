@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my beats - Music Website</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #000;
+            padding: 20px 0;
+            border-bottom: 2px solid #ff0000;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: #ff0000;
+            border-bottom: 2px solid #ff0000;
+        }
+        
+        /* Page Content Styles */
+        .page {
+            display: none;
+            padding: 40px 0;
+            min-height: 70vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        h1 {
+            color: #ff0000;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin: 25px 0 15px;
+            border-left: 4px solid #ff0000;
+            padding-left: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        /* Home Page Styles */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .featured-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .content-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1 1 300px;
+            transition: transform 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0000;
+        }
+        
+        /* Genres Page Styles */
+        .genre-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .genre-item {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff0000;
+        }
+        
+        .genre-item h3 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+        
+        /* Artists Page Styles */
+        .artist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .artist-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .artist-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .artist-image {
+            height: 180px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff0000;
+            font-size: 60px;
+        }
+        
+        .artist-info {
+            padding: 15px;
+        }
+        
+        .artist-info h3 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .artist-info p {
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #000;
+            border-top: 2px solid #ff0000;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ff0000;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .featured-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">MY<span>BEATS</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="genres">Genres</a></li>
+                    <li><a href="#" class="nav-link" data-page="artists">Artists</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Welcome to MY BEATS</h1>
+                <p>Your ultimate destination for all things music. Discover new genres, explore artists, and deepen your musical knowledge.</p>
+            </div>
+            
+            <h2>Featured Content</h2>
+            <div class="featured-content">
+                <div class="content-card">
+                    <h2>New Releases</h2>
+                    <p>Check out the latest albums and singles that are making waves in the music industry this month.</p>
+                </div>
+                <div class="content-card">
+                    <h2>Music History</h2>
+                    <p>Explore the evolution of music through the decades and learn how different genres emerged and influenced each other.</p>
+                </div>
+                <div class="content-card">
+                    <h2>Upcoming Events</h2>
+                    <p>Find information about concerts, festivals, and other music events happening near you or virtually.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Genres Page -->
+        <section id="genres" class="page">
+            <h1>Music Genres</h1>
+            <p>Explore the diverse world of music through its many genres. Each genre has its own unique history, characteristics, and cultural significance.</p>
+            
+            <div class="genre-list">
+                <div class="genre-item">
+                    <h3>Rock</h3>
+                    <p>Emerged in the 1950s, characterized by electric guitars, strong rhythms, and often focused on themes of rebellion and social issues.</p>
+                </div>
+                <div class="genre-item">
+                    <h3>Jazz</h3>
+                    <p>Originated in African American communities, featuring improvisation, syncopation, and complex harmonies.</p>
+                </div>
+                <div class="genre-item">
+                    <h3>Hip Hop</h3>
+                    <p>Born in the 1970s, featuring rhythmic music that accompanies rapping, rhythmic speech that's chanted.</p>
+                </div>
+                <div class="genre-item">
+                    <h3>Electronic</h3>
+                    <p>Created using electronic instruments and technology, with subgenres like house, techno, and dubstep.</p>
+                </div>
+                <div class="genre-item">
+                    <h3>Classical</h3>
+                    <p>Rooted in Western musical traditions, encompassing a broad period from the 11th century to present day.</p>
+                </div>
+                <div class="genre-item">
+                    <h3>Pop</h3>
+                    <p>Popular music characterized by catchy melodies, simple structures, and mass appeal across diverse audiences.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artists Page -->
+        <section id="artists" class="page">
+            <h1>Influential Artists</h1>
+            <p>Discover some of the most influential musicians across various genres who have shaped the music landscape.</p>
+            
+            <div class="artist-grid">
+                <div class="artist-card">
+                    <img src="C:\Users\Admin\Desktop\HD-wallpaper-bob-marley-smoking-2020-2021-bob-marley-cannabis-legend-pac-rasta-reggae-usa-thumbnail.jpg" alt="">
+                    <div class="artist-info">
+                        <h3>bob marley</h3>
+                        <p>Rock Guitar Virtuoso</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <img src="C:\Users\Admin\Desktop\fa619f4486817f426846a480a7f7350c.jpg" alt="">
+                    <div class="artist-info">
+                        <h3>kanye</h3>
+                        <p>Jazz Innovator</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <img src="C:\Users\Admin\Desktop\wp7087282.jpg" alt="">
+                    <div class="artist-info">
+                        <h3>frank ocean</h3>
+                        <p>Queen of Soul</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <img src="C:\Users\Admin\Desktop\images.jpeg" alt="" width="369" height="611">
+                    <div class="artist-info">
+                        <h3>Daft Punk</h3>
+                        <p>Electronic Pioneers</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                   <img src="C:\Users\Admin\Desktop\download.jpeg" alt="" width="369" height="611">
+                   <div class="artist-info">
+                        <h3>mf doom</h3>
+                        <p>Classical Composer</p>
+                    </div>
+                </div>
+                <div class="artist-card">
+                    <img src="C:\Users\Admin\Desktop\download (1).jpeg" alt="" width="369" height="611">
+                    <div class="artist-info">
+                        <h3>billi ellish</h3>
+                        <p>Pop Icon</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#">📱</a>
+                <a href="#">💻</a>
+                <a href="#">📸</a>
+                <a href="#">🎵</a>
+            </div>
+            <p>&copy; 2023 Harmony Hub Music Website. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple page navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and pages
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // Add active class to clicked link and corresponding page
+                    this.classList.add('active');
+                    const pageId = this.getAttribute('data-page');
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
